@@ -6,6 +6,9 @@ module WorkDesign
 
     end
 
+    def current_user
+
+    end
 
   end
 end

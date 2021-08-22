@@ -1,28 +1,30 @@
 # RubySdk
-Short description and motivation.
+在 Rails 应用中以微服务形式集成 Work Design 的业务组件
 
 ## Usage
 How to use my plugin.
 
-## Installation
-Add this line to your application's Gemfile:
-
 ```ruby
-gem 'work-design'
+gem 'work_design', require: 'work_design'
 ```
 
-And then execute:
-```bash
-$ bundle
+## 如何使用
+
+controller
+```ruby
+class ApplicationController < ActionController::API
+  include WorkDesign::Proxy
+  include WorkDesign::Identify
+end
 ```
 
-Or install it yourself as:
-```bash
-$ gem install ruby_sdk
+Routes
+```ruby
+Rails.application.routes.append do
+  match 'wechat/*path' => 'home#wechat', via: :all
+end
 ```
 
-## Contributing
-Contribution directions go here.
 
-## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+## 许可证
+遵循 [MIT](https://opensource.org/licenses/MIT) 协议

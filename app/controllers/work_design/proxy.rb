@@ -3,7 +3,7 @@ module WorkDesign
 
     def proxy_request
       process_request
-
+      binding.pry
       yield
 
       proxy_body
