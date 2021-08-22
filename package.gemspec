@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = 'work-design'
+  s.name = 'work_design'
   s.version = '0.1'
   s.authors = ['qinmingyuan']
   s.email = ['mingyuan0715@foxmail.com']
