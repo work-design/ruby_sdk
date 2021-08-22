@@ -3,7 +3,7 @@ module Wd
     extend ActiveSupport::Concern
 
     included do
-      has_many :tokens, class_name: 'Wd::Token'
+      has_many :wd_tokens, class_name: 'Wd::Token'
     end
 
   end

@@ -20,7 +20,12 @@ module Wd
         json: request.request_parameters
       )
 
-      token = Token.new(business: params[:business], auth_token: r.headers['auth-token'])
+      if defined?(current_user) && current_user && current_user.respond_to?(:wd_tokens)
+        token = current_user.wd_tokens.find_or_initialize_by(business: params[:business])
+      else
+        token = Token.new(business: params[:business])
+      end
+      token.auth_token = r.headers['auth-token']
       token.save
 
       case request.format.symbol
@@ -39,11 +44,21 @@ module Wd
     end
 
     def process_headers
+      hd = {}
       if request.format.symbol.nil?
-        { accept: 'application/json' }
+        hd.merge! accept: 'application/json'
       else
-        { accept: request.format.to_s }
+        hd.merge! accept: request.format.to_s
       end
+
+      if params[:auth_token]
+        hd.merge! auth_token: params[:auth_token]
+      elsif defined?(current_user) && current_user && current_user.respond_to?(:wd_tokens)
+        auth_token = current_user.wd_tokens.find_by(business: params[:business])
+        hd.merge! auth_token: auth_token if auth_token
+      end
+
+      hd
     end
 
   end
