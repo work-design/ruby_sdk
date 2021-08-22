@@ -21,7 +21,7 @@ end
 Routes
 ```ruby
 Rails.application.routes.append do
-  match 'wechat/*path' => 'home#wechat', via: :all
+  match 'wechat/*path' => 'home#wechat', via: :all, defaults: { business: 'wechat' }
 end
 ```
 
