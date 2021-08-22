@@ -1,4 +1,4 @@
-module WorkDesign
+module Wd
   module Identify
     extend ActiveSupport::Concern
 
