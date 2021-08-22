@@ -20,7 +20,9 @@ module Wd
         json: request.request_parameters
       )
 
-      if defined?(current_user) && current_user && current_user.respond_to?(:wd_tokens)
+      if params[:auth_token]
+        token = Token.find_by(auth_token: params[:auth_token], business: params[:business])
+      elsif defined?(current_user) && current_user && current_user.respond_to?(:wd_tokens)
         token = current_user.wd_tokens.find_or_initialize_by(business: params[:business])
       else
         token = Token.new(business: params[:business])
