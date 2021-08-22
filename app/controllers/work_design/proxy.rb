@@ -1,12 +1,11 @@
+require 'httpx'
 module WorkDesign
   module Proxy
 
     def proxy_request
       process_request
-      binding.pry
       yield
-
-      proxy_body
+      process_body
     end
 
     def process_request
@@ -17,7 +16,7 @@ module WorkDesign
       r = HTTPX.request(
         request.method,
         url,
-        headers: proxy_headers,
+        headers: process_headers,
         json: request.request_parameters
       )
 
@@ -27,7 +26,7 @@ module WorkDesign
       end
     end
 
-    def proxy_body
+    def process_body
       if response.no_content?
         response.status = 200
         response.body = @body.to_json
@@ -36,7 +35,7 @@ module WorkDesign
       end
     end
 
-    def proxy_headers
+    def process_headers
       if request.format.symbol.nil?
         { accept: 'application/json' }
       else

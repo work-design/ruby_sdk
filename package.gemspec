@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'rails', '~> 6.1'
+  s.add_dependency 'httpx', '~> 0.16'
 end
