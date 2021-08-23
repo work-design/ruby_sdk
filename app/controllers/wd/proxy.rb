@@ -12,6 +12,7 @@ module Wd
       url = URI(request.url)
       url.host = WorkDesign.config.host
       url.port = WorkDesign.config.port
+      url.scheme = WorkDesign.config.scheme
 
       r = HTTPX.request(
         request.method,
