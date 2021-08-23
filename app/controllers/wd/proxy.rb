@@ -10,8 +10,8 @@ module Wd
 
     def process_request
       url = URI(request.url)
-      url.host = 'lvh.me'
-      url.port = 3001
+      url.host = WorkDesign.config.host
+      url.port = WorkDesign.config.port
 
       r = HTTPX.request(
         request.method,
