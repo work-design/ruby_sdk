@@ -10,9 +10,10 @@ module Wd
 
     def process_request
       url = URI(request.url)
-      url.host = WorkDesign.config.host
-      url.port = WorkDesign.config.port
-      url.scheme = WorkDesign.config.scheme
+      host_config = WorkDesign.config.services.fetch(params[:business].to_sym, {})
+      url.host = host_config[:host]
+      url.port = host_config[:port]
+      url.scheme = host_config[:scheme]
 
       r = HTTPX.request(
         request.method,

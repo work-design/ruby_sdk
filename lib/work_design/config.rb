@@ -2,9 +2,12 @@ module WorkDesign
   include ActiveSupport::Configurable
 
   configure do |config|
-    config.scheme = 'http'
-    config.host = '0.0.0.0'
-    config.port = '3000'
+    config.services = ActiveSupport::OrderedOptions.new
+    config.services.wechat = {
+      scheme: 'https',
+      host: 'kongque.work.design',
+      port: 443
+    }
   end
 
 end
