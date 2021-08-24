@@ -3,11 +3,9 @@ module Wd
     extend ActiveSupport::Concern
 
     included do
-
     end
 
     def current_user
-
     end
 
     def auth_token
