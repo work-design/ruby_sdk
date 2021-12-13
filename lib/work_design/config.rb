@@ -5,7 +5,7 @@ module WorkDesign
     config.services = ActiveSupport::OrderedOptions.new
     config.services.wechat = {
       scheme: 'https',
-      host: 'kongque.work.design',
+      host: 'wechat.work.design',
       port: 443
     }
   end
